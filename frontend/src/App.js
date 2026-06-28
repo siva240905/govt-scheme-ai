@@ -148,6 +148,8 @@ const parseInlineFormatting = (content) => {
   });
 };
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === "production" ? "/_/backend" : "http://localhost:5000");
+
 function App() {
   const [activeTab, setActiveTab] = useState("finder");
   const [schemes, setSchemes] = useState(LOCAL_SCHEMES_FALLBACK);
@@ -188,7 +190,7 @@ function App() {
   useEffect(() => {
     const fetchSchemes = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/schemes");
+        const response = await fetch(`${API_BASE_URL}/api/schemes`);
         if (response.ok) {
           const data = await response.json();
           setSchemes(data);
@@ -268,7 +270,7 @@ function App() {
     setChatLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/chat", {
+       const response = await fetch(`${API_BASE_URL}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
