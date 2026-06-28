@@ -115,22 +115,7 @@ const renderMarkdown = (text) => {
 };
 
 const parseInlineFormatting = (content) => {
-  // Bold formatting **text**
-  const boldRegex = /\*\*(.*?)\*\*/g;
-  // Link formatting [text](url)
-  const linkRegex = /\[(.*?)\]\((.*?)\)/g;
-  
-  let elements = [];
-  let lastIndex = 0;
-  let match;
-  
-  let workingString = content;
-  
-  // Replace links first with JSX, then bold
-  // For simplicity, handle standard bolding and links inline
-  const parts = [];
   let txt = content;
-  
   // Simple bold extraction
   const regex = /(\*\*.*?\*\*|\[.*?\]\(.*?\))/g;
   const matches = txt.split(regex);
@@ -342,6 +327,15 @@ function App() {
     acc[s.occupation_required] = (acc[s.occupation_required] || 0) + 1;
     return acc;
   }, {});
+
+  if (loading) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "15px", justifyContent: "center", alignItems: "center", minHeight: "100vh", background: "#070a13", color: "white", fontFamily: "var(--font-display)" }}>
+        <i className="fa-solid fa-circle-notch fa-spin" style={{ fontSize: "2rem", color: "var(--accent-indigo)" }}></i>
+        <span style={{ fontSize: "1.1rem", fontWeight: "600" }}>Loading GovtScheme.AI...</span>
+      </div>
+    );
+  }
 
   return (
     <div style={styles.appContainer}>
@@ -846,7 +840,6 @@ function App() {
 
                     {/* Bars */}
                     {schemes.map((s, idx) => {
-                      const maxVal = 5000000;
                       // Logarithmic-like scaling for visual presentation of wide ranges (2L to 50L)
                       const val = s.income_limit;
                       let percent = 0.1;
