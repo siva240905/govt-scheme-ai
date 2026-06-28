@@ -1,0 +1,20 @@
+"Hello everyone. Today, I am presenting my project called GovtScheme.AI.
+
+The Problem: There are many government schemes available, but they are hard to find. People don't know which schemes they qualify for because the rules are too complicated.
+
+The Solution: GovtScheme.AI makes finding government schemes easy and smart.
+
+Our project has three main features:
+
+Scheme Finder: You input your age, income, and job, and it instantly shows you only the schemes you are eligible for.
+Scheme Mitra (AI Chatbot): A helpful chat assistant. You can chat with it in English or Tamil, and it will recommend the best schemes for you.
+Explorer & Compare: You can search through schemes and compare them side-by-side.
+Technology Used:
+
+ReactJS for a fast and beautiful frontend.
+NodeJS & Express for the backend server.
+Vanilla CSS for the modern frosted-glass design.
+GitHub & Vercel to host the website online.
+In short, this project helps common people find and apply for the right government schemes in just a few clicks.
+
+Thank you!
