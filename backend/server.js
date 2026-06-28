@@ -7,6 +7,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Strip Vercel Services route prefix if present
+app.use((req, res, next) => {
+  if (req.url.startsWith("/_/backend")) {
+    req.url = req.url.replace("/_/backend", "");
+  }
+  next();
+});
+
 const SCHEMES_FILE = path.join(__dirname, "schemes.json");
 
 // Helper to read schemes
@@ -181,8 +189,12 @@ app.post("/api/chat", (req, res) => {
   res.json({ response: responseText });
 });
 
-// Run server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Run server or export for Vercel Serverless
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
